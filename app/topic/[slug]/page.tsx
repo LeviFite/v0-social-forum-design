@@ -26,7 +26,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
     )
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()

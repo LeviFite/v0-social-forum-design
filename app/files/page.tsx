@@ -12,7 +12,7 @@ export default async function FilesPage() {
     )
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()

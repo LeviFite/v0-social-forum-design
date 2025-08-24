@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     }
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
 
   // Get user and blog post
   const { data: user } = await supabase.from("users").select("*").eq("username", params.username).single()
@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     )
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
   const {
     data: { user: currentUser },
   } = await supabase.auth.getUser()

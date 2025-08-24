@@ -13,7 +13,7 @@ export default async function NotificationSettingsPage() {
     )
   }
 
-  const supabase = createClient()
+  const supabase = await createClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()
