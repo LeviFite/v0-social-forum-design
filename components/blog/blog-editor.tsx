@@ -11,7 +11,7 @@ import { ArrowLeft, Save, Eye, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { supabase } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
-import BlockEditor from "./block-editor"
+import { Textarea } from "@/components/ui/textarea"
 
 interface BlogEditorProps {
   mode: "create" | "edit"
@@ -234,9 +234,17 @@ export default function BlogEditor({ mode, blogPost }: BlogEditorProps) {
           <CardTitle>Content</CardTitle>
         </CardHeader>
         <CardContent>
-          <BlockEditor
-            content={formData.content}
-            onChange={(content) => setFormData((prev) => ({ ...prev, content }))}
+          <Textarea
+            placeholder="Write your blog content here..."
+            className="min-h-[300px]"
+            value={JSON.stringify(formData.content, null, 2)}
+            onChange={(e) => {
+              try {
+                setFormData((prev) => ({ ...prev, content: JSON.parse(e.target.value) }))
+              } catch (error) {
+                // Handle JSON parsing error if needed
+              }
+            }}
           />
         </CardContent>
       </Card>
